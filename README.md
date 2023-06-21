@@ -17,7 +17,7 @@ This project is not complete and certainly has bugs. The most recent additions w
 
 ## Installing
 To get this addon working:
- - Copy the addons folder to your Godot project.
+ - Download the latest release and copy the addons folder to your Godot project.
  - (Optional) In the bt_editor_plugin.gd script, add the folders for your custom BTNodes under `_paths`. Otherwise, the plugin will only find nodes inside its own folders.
  - Enable the plugin in the project settings.
 
