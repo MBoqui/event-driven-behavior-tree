@@ -114,11 +114,12 @@ func remove_single_running_node(node : BTNode) -> void:
 		_running_leaves.erase(node)
 
 
-func try_abort_running_node(node : BTNode) -> bool:
+func try_abort_running_node(node : BTNode, include_self := false) -> bool:
 	var index = _running_nodes.find(node)
 	if index == -1 : return false
 
-	var i = index + 1
+	var include_self_offset = 0 if include_self else 1
+	var i = index + include_self_offset
 	while i < len(_running_nodes):
 		node = _running_nodes[i]
 		node._abort(_agent)
