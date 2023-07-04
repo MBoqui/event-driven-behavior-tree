@@ -56,8 +56,8 @@ func remove_single_running_node(node : BTNode) -> void:
 	active_tree.remove_single_running_node(node)
 
 
-func try_abort_running_node(node : BTNode) -> bool:
-	return active_tree.try_abort_running_node(node)
+func try_abort_running_node(node : BTNode, include_self := false) -> bool:
+	return active_tree.try_abort_running_node(node, include_self)
 
 
 func get_monitor_is_dirty(monitor) -> bool:

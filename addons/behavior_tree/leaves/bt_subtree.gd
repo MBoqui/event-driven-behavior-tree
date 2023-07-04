@@ -33,7 +33,7 @@ func _abort(agent : BTAgent) -> void:
 	agent.set_active_subtree(_running_tree, self)
 	agent.active_tree = _running_tree
 
-	_running_tree.try_abort_running_node(_running_tree.tree)
+	_running_tree.try_abort_running_node(_running_tree.tree, true)
 
 	agent.active_tree = current_tree
 	agent.set_active_subtree(null)
