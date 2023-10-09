@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bejrw02bn3lic"]
+
+[ext_resource type="PackedScene" uid="uid://bme1ilg7eenjk" path="res://demos/basics/level.tscn" id="1_fqsaa"]
+[ext_resource type="PackedScene" uid="uid://es771sguwven" path="res://demos/basics/character.tscn" id="2_gcjkb"]
+[ext_resource type="Script" path="res://demos/basics/player.gd" id="3_nwkcq"]
+[ext_resource type="Script" path="res://demos/basics/enemy_bt_agent.gd" id="4_ve1gt"]
+[ext_resource type="Resource" uid="uid://dd5ickah1snt7" path="res://demos/basics/enemy_bt.tres" id="6_nsb35"]
+
+[node name="Basics-Main" type="Node"]
+
+[node name="Level" parent="." instance=ExtResource("1_fqsaa")]
+
+[node name="Player" parent="." instance=ExtResource("2_gcjkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 8)
+collision_layer = 2
+script = ExtResource("3_nwkcq")
+speed = 15.0
+
+[node name="Enemy" parent="." instance=ExtResource("2_gcjkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 8)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy"]
+
+[node name="BTAgent" type="Node" parent="Enemy" node_paths=PackedStringArray("player")]
+script = ExtResource("4_ve1gt")
+player = NodePath("../../Player")
+target_tree = ExtResource("6_nsb35")
+
+[node name="RayCast3D" type="RayCast3D" parent="Enemy"]
+target_position = Vector3(0, 0, -100)
+collision_mask = 3
