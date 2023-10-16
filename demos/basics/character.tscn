@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://es771sguwven"]
+
+[ext_resource type="Script" path="res://demos/basics/character.gd" id="1_bv71p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_koh70"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oqswj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujp17"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c4gm5"]
+material = SubResource("StandardMaterial3D_ujp17")
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_bv71p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_koh70")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_oqswj")
+
+[node name="Eyes" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.638742, 0, 0, 0, 0.304479, 0, 0, 0, 0.482979, 0, 0.50533, 0.39138)
+mesh = SubResource("BoxMesh_c4gm5")
+skeleton = NodePath("../..")

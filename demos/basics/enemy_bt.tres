@@ -1,0 +1,117 @@
+[gd_resource type="Resource" script_class="BTSelector" load_steps=13 format=3 uid="uid://dd5ickah1snt7"]
+
+[ext_resource type="Script" path="res://addons/behavior_tree/leaves/bt_callable.gd" id="1_ybvx2"]
+[ext_resource type="Script" path="res://addons/behavior_tree/composites/bt_sequence.gd" id="2_fapxw"]
+[ext_resource type="Script" path="res://addons/behavior_tree/conditions/bt_blackboard_is.gd" id="2_h25v7"]
+[ext_resource type="Script" path="res://addons/behavior_tree/composites/bt_selector.gd" id="3_p6sm3"]
+
+[sub_resource type="Resource" id="Resource_q8gvs"]
+script = ExtResource("1_ybvx2")
+method_name = "set_move_target"
+expression = "agent.player.global_position"
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(680, 160)
+sibling_index = 0
+tree_index = 2
+name = "Set target as player"
+
+[sub_resource type="Resource" id="Resource_01jrt"]
+script = ExtResource("1_ybvx2")
+method_name = "move"
+expression = ""
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(680, 240)
+sibling_index = 1
+tree_index = 3
+name = "Move to Player"
+
+[sub_resource type="Resource" id="Resource_xaf70"]
+script = ExtResource("2_h25v7")
+key = "player_in_sight"
+expression = "true"
+monitor_type = 1
+name = "Player in sight"
+
+[sub_resource type="Resource" id="Resource_qbdpw"]
+script = ExtResource("2_fapxw")
+inherit_children_utility = false
+children = Array[Resource("res://addons/behavior_tree/bt_node.gd")]([SubResource("Resource_q8gvs"), SubResource("Resource_01jrt")])
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([SubResource("Resource_xaf70")])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(380, 240)
+sibling_index = 0
+tree_index = 1
+name = "Chase"
+
+[sub_resource type="Resource" id="Resource_868qb"]
+script = ExtResource("1_ybvx2")
+method_name = "set_move_target"
+expression = "Vector3(20, 1, 0).rotated(Vector3(0, 1, 0), randf_range(0, 360))"
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(680, 380)
+sibling_index = 0
+tree_index = 5
+name = "Set target to patrol"
+
+[sub_resource type="Resource" id="Resource_0i7kc"]
+script = ExtResource("1_ybvx2")
+method_name = "move"
+expression = ""
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(680, 460)
+sibling_index = 1
+tree_index = 6
+name = "Move"
+
+[sub_resource type="Resource" id="Resource_g1j48"]
+script = ExtResource("1_ybvx2")
+method_name = "wait"
+expression = "2"
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(680, 540)
+sibling_index = 2
+tree_index = 7
+name = "Wait"
+
+[sub_resource type="Resource" id="Resource_a8vlb"]
+script = ExtResource("2_fapxw")
+inherit_children_utility = false
+children = Array[Resource("res://addons/behavior_tree/bt_node.gd")]([SubResource("Resource_868qb"), SubResource("Resource_0i7kc"), SubResource("Resource_g1j48")])
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(380, 460)
+sibling_index = 1
+tree_index = 4
+name = "Patrol"
+
+[resource]
+script = ExtResource("3_p6sm3")
+inherit_children_utility = false
+children = Array[Resource("res://addons/behavior_tree/bt_node.gd")]([SubResource("Resource_qbdpw"), SubResource("Resource_a8vlb")])
+utilities = Array[Resource("res://addons/behavior_tree/utilities/bt_utility.gd")]([])
+conditions = Array[Resource("res://addons/behavior_tree/conditions/bt_condition.gd")]([])
+modifiers = Array[Resource("res://addons/behavior_tree/modifiers/bt_modifier.gd")]([])
+utility_compound_mode = 0
+graph_position = Vector2(120, 300)
+sibling_index = -1
+tree_index = 0
+name = "Root"
